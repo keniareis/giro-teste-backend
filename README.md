@@ -13,7 +13,7 @@ Nosso desafio técnico é composto por **duas áreas principais**, abrangendo **
 - As linguagens/tecnologias permitidas para o desafio são:
   - **Back End:** Java, Python, NodeJS e NextJs.
   - **Front End:** JavaScript/TypeScript, React, Angular e NextJs.
-
+- O projeto **deve** incluir um arquivo README.md com orientações claras de como executar e testar a aplicação.
 ---
 
 ## **2. Estrutura do Desafio**
