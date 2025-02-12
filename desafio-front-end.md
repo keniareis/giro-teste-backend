@@ -1,4 +1,4 @@
-# Giro.Tech - Desafio Técnico Front End
+# Giro.Tech - Desafio Técnico Frontend
 
 ---
 ## **1. Introdução**
@@ -7,7 +7,7 @@ Este teste tem como objetivo avaliar sua capacidade de desenvolver um sistema qu
 Sua missão é criar um **pequeno painel financeiro** que exiba as **taxas de juros do Brasil** e as **cotações de moedas**, obtidas a partir da [HG Brasil Finance API](https://console.hgbrasil.com/documentation/finance).
 
 Para isso, você deverá desenvolver:  
-- **Front End:** Criar uma interface para exibir as informações extraídas da API.  
+- **Frontend:** Criar uma interface para exibir as informações extraídas da API.  
 - **Consumo de API:** Integrar diretamente com a API da HG Brasil Finance.
 
 
