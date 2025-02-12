@@ -2,24 +2,24 @@
 
 Bem-vindo(a) ao **Desafio Técnico da Giro.Tech**! 🎉
 
-Nosso desafio técnico é composto por **duas áreas principais**, abrangendo **Back End e Front End**. O objetivo é avaliar suas habilidades em **desenvolvimento, lógica de programação e manipulação de dados**.
+Nosso desafio técnico é composto por **duas áreas principais**, abrangendo **Backend e Frontend**. O objetivo é avaliar suas habilidades em **desenvolvimento, lógica de programação e manipulação de dados**.
 
 ---
 
 ## **1. Regras Gerais**
-- Você **deve** escolher e resolver apenas 1 dos desafios (Back End ou Front End).
+- Você **deve** escolher e resolver apenas 1 dos desafios (Backend ou Frontend).
 - O envio **deve** ser feito através de um repositório público no **GitHub**.
 - Utilizar commits **organizados e descritivos**.
 - As linguagens/tecnologias permitidas para o desafio são:
-  - **Back End:** Java, Python, NodeJS e NextJs.
-  - **Front End:** JavaScript/TypeScript, React, Angular e NextJs.
+  - **Backend:** Java, Python, NodeJS e NextJs.
+  - **Frontend:** JavaScript/TypeScript, React, Angular e NextJs.
 - O projeto **deve** incluir um arquivo README.md com orientações claras de como executar e testar a aplicação.
 ---
 
 ## **2. Estrutura do Desafio**
 
-🔗 [1. Acesse o desafio de Back End](desafio-back-end.md)  
-🔗 [2. Acesse o desafio de Front End](desafio-front-end.md)  
+🔗 [1. Acesse o desafio de Backend](desafio-back-end.md)  
+🔗 [2. Acesse o desafio de Frontend](desafio-front-end.md)  
 
  
 
