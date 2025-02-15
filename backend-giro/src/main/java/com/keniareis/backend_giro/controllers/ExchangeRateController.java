@@ -36,4 +36,9 @@ public class ExchangeRateController {
     public List<RecentRateResponseDTO> getRecentRates(){
         return exchangeRateService.getRecentRates();
     }
+
+    @PutMapping("/{id}")
+    public ExchangeRate updateExchangeRate(@PathVariable Long id, @RequestBody ExchangeRateDTO updateDTO){
+        return exchangeRateService.updateExchangeRate(id, updateDTO);
+    }
 }

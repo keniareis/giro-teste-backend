@@ -1,5 +1,6 @@
 package com.keniareis.backend_giro.services;
 
+import com.keniareis.backend_giro.dto.ExchangeRateDTO;
 import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.ExchangeRate;
 import com.keniareis.backend_giro.repository.ExchangeRateRepository;
@@ -15,6 +16,9 @@ public class ExchangeRateService {
 
     @Autowired
     private ExchangeRateRepository exchangeRateRepository;
+
+    @Autowired
+    private CurrencyService currencyService;
 
     public ExchangeRate createExchangeRate(ExchangeRate exchangeRate){
         return exchangeRateRepository.save(exchangeRate);
@@ -40,5 +44,16 @@ public class ExchangeRateService {
         dto.setCurrencyType(exchangeRate.getCurrency().getType());
 
         return dto;
+    }
+
+    public ExchangeRate updateExchangeRate(Long id, ExchangeRateDTO updateDTO){
+        ExchangeRate exchangeRate = exchangeRateRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Exchange rate not found with ID: \" + id"));
+
+        exchangeRate.setDailyVariation(updateDTO.getDailyVariation());
+        exchangeRate.setDailyRate(updateDTO.getDailyRate());
+        exchangeRate.setCurrency(currencyService.getCurrencyById(updateDTO.getCurrencyId()));
+
+        return exchangeRateRepository.save(exchangeRate);
     }
 }
