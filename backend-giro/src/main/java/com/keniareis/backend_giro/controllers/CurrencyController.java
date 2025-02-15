@@ -1,10 +1,27 @@
 package com.keniareis.backend_giro.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.keniareis.backend_giro.models.Currency;
+import com.keniareis.backend_giro.services.CurrencyService;
+import jdk.dynalink.linker.LinkerServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/currencies")
 public class CurrencyController {
 
+    @Autowired
+    private CurrencyService currencyService;
+
+    @PostMapping
+    public Currency createCurrency(@RequestBody Currency currency){
+        return currencyService.createCurrency(currency);
+    }
+
+    @GetMapping
+    public List<Currency> getAllCurrencies(){
+        return currencyService.getAllCurrencies();
+    }
 }
