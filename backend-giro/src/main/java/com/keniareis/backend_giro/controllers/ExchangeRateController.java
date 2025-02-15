@@ -1,6 +1,7 @@
 package com.keniareis.backend_giro.controllers;
 
 import com.keniareis.backend_giro.dto.ExchangeRateDTO;
+import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.ExchangeRate;
 import com.keniareis.backend_giro.services.CurrencyService;
 import com.keniareis.backend_giro.services.ExchangeRateService;
@@ -32,7 +33,7 @@ public class ExchangeRateController {
     }
 
     @GetMapping("/recent")
-    public List<ExchangeRate> getRecentRates(){
+    public List<RecentRateResponseDTO> getRecentRates(){
         return exchangeRateService.getRecentRates();
     }
 }
