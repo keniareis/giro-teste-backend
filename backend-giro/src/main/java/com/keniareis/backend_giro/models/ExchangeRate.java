@@ -1,5 +1,6 @@
 package com.keniareis.backend_giro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,6 +24,11 @@ public class ExchangeRate {
 
     @ManyToOne
     @JoinColumn(name = "currency_id")
-    @JsonProperty("currency_id")
+    @JsonIgnore
     private Currency currency;
+
+    @JsonProperty("currency_id")
+    public Long getCurrencyId(){
+        return currency != null ? currency.getId() : null;
+    }
 }

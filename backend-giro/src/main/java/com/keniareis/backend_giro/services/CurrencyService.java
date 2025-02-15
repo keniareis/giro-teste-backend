@@ -20,4 +20,9 @@ public class CurrencyService {
     public List<Currency> getAllCurrencies(){
         return currencyRepository.findAll();
     }
+
+    public Currency getCurrencyById(Long id){
+        return currencyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Currency not found"));
+    }
 }
