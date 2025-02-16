@@ -76,9 +76,12 @@ public class ExchangeRateService {
 
     public void deleteOldRates(){
         LocalDate cutoffDate = LocalDate.now().minusDays(30);
-        if (cutoffDate.isAfter(LocalDate.now())){
-            throw new IllegalArgumentException("Invalid cutoff date");
+
+        long count = exchangeRateRepository.countByDateBefore(cutoffDate);
+        if (count == 0){
+            throw new IllegalArgumentException("No old exchange rates found to delete");
         }
+
         exchangeRateRepository.deleteOldRates(cutoffDate);
     }
 }

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ExchangeRateRepository extends JpaRepository<ExchangeRate, Long> {
+    long countByDateBefore(LocalDate cutoffDate);
 
     @Query("SELECT er FROM ExchangeRate er WHERE er.date >= :date")
     List<ExchangeRate> findRecentRates(LocalDate date);
