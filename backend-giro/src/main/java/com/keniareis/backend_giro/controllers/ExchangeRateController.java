@@ -23,6 +23,10 @@ public class ExchangeRateController {
 
     @PostMapping
     public ExchangeRate createExchangeRate(@Valid @RequestBody ExchangeRateDTO exchangeRateDTO){
+        if (exchangeRateDTO.getCurrencyId() == null){
+            throw new IllegalArgumentException("currency_id must not be null");
+        }
+
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setDate(exchangeRateDTO.getDate());
         exchangeRate.setDailyVariation(exchangeRateDTO.getDailyVariation());

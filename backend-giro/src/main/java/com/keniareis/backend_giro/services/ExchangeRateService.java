@@ -50,15 +50,31 @@ public class ExchangeRateService {
         ExchangeRate exchangeRate = exchangeRateRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exchange rate not found with ID: \" + id"));
 
-        exchangeRate.setDailyVariation(updateDTO.getDailyVariation());
-        exchangeRate.setDailyRate(updateDTO.getDailyRate());
-        exchangeRate.setCurrency(currencyService.getCurrencyById(updateDTO.getCurrencyId()));
+        if (updateDTO.getId() != null && !updateDTO.getId().equals(id)){
+            throw new RuntimeException("ID cannot be updated");
+        }
+        if (updateDTO.getDate() != null && !updateDTO.getDate().equals(exchangeRate.getDate())){
+            throw new RuntimeException("Date cannot be updated");
+        }
+
+        if (updateDTO.getDailyVariation() != null){
+            exchangeRate.setDailyVariation(updateDTO.getDailyVariation());
+        }
+        if (updateDTO.getDailyRate() != null) {
+            exchangeRate.setDailyRate(updateDTO.getDailyRate());
+        }
+        if (updateDTO.getCurrencyId() != null) {
+            exchangeRate.setCurrency(currencyService.getCurrencyById(updateDTO.getCurrencyId()));
+        }
 
         return exchangeRateRepository.save(exchangeRate);
     }
 
     public void deleteOldRates(){
         LocalDate cutoffDate = LocalDate.now().minusDays(30);
+        if (cutoffDate.isAfter(LocalDate.now())){
+            throw new IllegalArgumentException("Invalid cutoff date")
+        }
         exchangeRateRepository.deleteOldRates(cutoffDate);
     }
 }

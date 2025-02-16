@@ -30,6 +30,10 @@ public class CurrencyService {
     }
 
     public Currency getCurrencyById(Long id){
+        if (id == null){
+            throw new IllegalArgumentException("Currency ID must not be null");
+        }
+
         return currencyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Currency not found"));
     }
