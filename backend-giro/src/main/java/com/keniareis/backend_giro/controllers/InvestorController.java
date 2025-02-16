@@ -4,6 +4,9 @@ import com.keniareis.backend_giro.models.Investor;
 import com.keniareis.backend_giro.services.InvestorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/investors")
 public class InvestorController {
@@ -14,5 +17,16 @@ public class InvestorController {
     @PostMapping
     public Investor createInvestor(@RequestBody Investor investor){
         return investorService.createInvestor(investor);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteInvestor(@PathVariable Long id){
+        investorService.deleteInvestor(id);
+        return "Investor and associated investments deleted successfully";
+    }
+
+    @GetMapping
+    public List<Investor> getAllInvestors(){
+        return investorService.getAllInvestors();
     }
 }
