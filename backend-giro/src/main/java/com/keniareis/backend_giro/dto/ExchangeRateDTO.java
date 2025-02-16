@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class ExchangeRateDTO {
     private Long id;
 
-    @NotNull(message = "date is required")
     private LocalDate date;
 
     @NotNull(message = "daily_variation is required")

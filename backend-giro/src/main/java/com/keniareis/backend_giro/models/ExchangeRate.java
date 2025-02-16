@@ -16,7 +16,6 @@ public class ExchangeRate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "date is required")
     private LocalDate date;
 
     @NotNull(message = "daily_variation is required")

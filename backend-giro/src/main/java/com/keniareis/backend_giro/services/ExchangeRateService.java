@@ -33,6 +33,10 @@ public class ExchangeRateService {
                 .collect(Collectors.toList());
     }
 
+    public List<ExchangeRate> getAllExchangeRates(){
+        return exchangeRateRepository.findAll();
+    }
+
     private RecentRateResponseDTO mapToDTO(ExchangeRate exchangeRate){
         RecentRateResponseDTO dto = new RecentRateResponseDTO();
 
@@ -73,7 +77,7 @@ public class ExchangeRateService {
     public void deleteOldRates(){
         LocalDate cutoffDate = LocalDate.now().minusDays(30);
         if (cutoffDate.isAfter(LocalDate.now())){
-            throw new IllegalArgumentException("Invalid cutoff date")
+            throw new IllegalArgumentException("Invalid cutoff date");
         }
         exchangeRateRepository.deleteOldRates(cutoffDate);
     }
