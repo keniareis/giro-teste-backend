@@ -41,4 +41,10 @@ public class ExchangeRateController {
     public ExchangeRate updateExchangeRate(@PathVariable Long id, @RequestBody ExchangeRateDTO updateDTO){
         return exchangeRateService.updateExchangeRate(id, updateDTO);
     }
+
+    @DeleteMapping("/old")
+    public String deleteOldRates(){
+        exchangeRateService.deleteOldRates();
+        return "Old exchange rates deleted successfully";
+    }
 }

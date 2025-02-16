@@ -56,4 +56,9 @@ public class ExchangeRateService {
 
         return exchangeRateRepository.save(exchangeRate);
     }
+
+    public void deleteOldRates(){
+        LocalDate cutoffDate = LocalDate.now().minusDays(30);
+        exchangeRateRepository.deleteOldRates(cutoffDate);
+    }
 }
