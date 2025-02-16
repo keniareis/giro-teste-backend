@@ -35,7 +35,7 @@ public class InvestmentDTO {
     private Long currencyId;
 
     @NotNull(message = "investor_id is required")
-    @Positive(message = "inves_id must be positive")
+    @Positive(message = "investor_id must be positive")
     @JsonProperty("investor_id")
     private Long investorId;
 }
