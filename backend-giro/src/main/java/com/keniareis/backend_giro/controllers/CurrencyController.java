@@ -2,7 +2,7 @@ package com.keniareis.backend_giro.controllers;
 
 import com.keniareis.backend_giro.models.Currency;
 import com.keniareis.backend_giro.services.CurrencyService;
-import jdk.dynalink.linker.LinkerServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class CurrencyController {
     private CurrencyService currencyService;
 
     @PostMapping
-    public Currency createCurrency(@RequestBody Currency currency){
+    public Currency createCurrency(@Valid @RequestBody Currency currency){
         return currencyService.createCurrency(currency);
     }
 

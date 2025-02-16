@@ -15,12 +15,9 @@ public class Currency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "currency name is required")
     @NotBlank(message = "currency name must not be blank")
     private String name;
 
-
-    @NotNull(message = "currency type is required")
     @NotBlank(message = "currency type must not be blank")
     private String type;
 

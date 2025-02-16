@@ -5,6 +5,7 @@ import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.ExchangeRate;
 import com.keniareis.backend_giro.services.CurrencyService;
 import com.keniareis.backend_giro.services.ExchangeRateService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class ExchangeRateController {
     private CurrencyService currencyService;
 
     @PostMapping
-    public ExchangeRate createExchangeRate(@RequestBody ExchangeRateDTO exchangeRateDTO){
+    public ExchangeRate createExchangeRate(@Valid @RequestBody ExchangeRateDTO exchangeRateDTO){
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setDate(exchangeRateDTO.getDate());
         exchangeRate.setDailyVariation(exchangeRateDTO.getDailyVariation());
@@ -38,7 +39,7 @@ public class ExchangeRateController {
     }
 
     @PutMapping("/{id}")
-    public ExchangeRate updateExchangeRate(@PathVariable Long id, @RequestBody ExchangeRateDTO updateDTO){
+    public ExchangeRate updateExchangeRate(@PathVariable Long id, @Valid @RequestBody ExchangeRateDTO updateDTO){
         return exchangeRateService.updateExchangeRate(id, updateDTO);
     }
 

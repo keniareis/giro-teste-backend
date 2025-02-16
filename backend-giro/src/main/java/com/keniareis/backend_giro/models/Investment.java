@@ -36,14 +36,12 @@ public class Investment {
     private Double finalAmount;
 
     @NotNull(message = "currency_id is required")
-    @Positive(message = "currency_id must be positive")
     @ManyToOne
     @JoinColumn(name = "currency_id")
     @JsonIgnore
     private Currency currency;
 
     @NotNull(message = "investor_id is required")
-    @Positive(message = "investor_id must be positive")
     @ManyToOne
     @JoinColumn(name = "investor_id")
     @JsonIgnore

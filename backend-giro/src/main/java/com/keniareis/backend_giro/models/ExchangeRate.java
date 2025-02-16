@@ -31,7 +31,6 @@ public class ExchangeRate {
     @JoinColumn(name = "currency_id")
     @JsonIgnore
     @NotNull(message = "currency_id is required")
-    @Positive(message = "currency_id must be positive")
     private Currency currency;
 
     @JsonProperty("currency_id")

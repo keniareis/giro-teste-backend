@@ -1,5 +1,6 @@
 package com.keniareis.backend_giro.services;
 
+import com.keniareis.backend_giro.exceptions.DuplicateCurrencyException;
 import com.keniareis.backend_giro.models.Currency;
 import com.keniareis.backend_giro.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,13 @@ public class CurrencyService {
     private CurrencyRepository currencyRepository;
 
     public Currency createCurrency(Currency currency){
+        if(currencyRepository.findByName(currency.getName()).isPresent()){
+            throw new DuplicateCurrencyException("Currency with name " + currency.getName() + " already exists");
+        }
+
+        if (currencyRepository.findByType(currency.getType()).isPresent()){
+            throw new DuplicateCurrencyException("Currency with type " + currency.getType() + " already exists");
+        }
         return currencyRepository.save(currency);
     }
 
