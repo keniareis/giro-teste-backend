@@ -1,5 +1,6 @@
 package com.keniareis.backend_giro.controllers;
 
+import com.keniareis.backend_giro.dto.InvestmentDTO;
 import com.keniareis.backend_giro.models.Investment;
 import com.keniareis.backend_giro.services.InvestmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class InvestmentController {
     private InvestmentService investmentService;
 
     @PostMapping
-    public Investment createInvestment(@RequestBody Investment investment){
-        return investmentService.createInvestment(investment);
+    public Investment createInvestment(@RequestBody InvestmentDTO investmentDTO){
+        return investmentService.createInvestment(investmentDTO);
     }
 }

@@ -12,8 +12,8 @@ public class Investment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("inicial_amount")
-    private Double inicialAmount;
+    @JsonProperty("initial_amount")
+    private Double initialAmount;
     private Integer months;
 
     @JsonProperty("interest_rate")
@@ -31,4 +31,14 @@ public class Investment {
     @JoinColumn(name = "investor_id")
     @JsonIgnore
     private Investor investor;
+
+    @JsonProperty("currency_id")
+    public Long getCurrencyId() {
+        return currency != null ? currency.getId() : null;
+    }
+
+    @JsonProperty("investor_id")
+    public Long getInvestorId() {
+        return investor != null ? investor.getId() : null;
+    }
 }
