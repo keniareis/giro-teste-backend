@@ -4,7 +4,6 @@ import com.keniareis.backend_giro.exceptions.DuplicateCurrencyException;
 import com.keniareis.backend_giro.models.Currency;
 import com.keniareis.backend_giro.repository.CurrencyRepository;
 
-import org.h2.command.dml.MergeUsing.When;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

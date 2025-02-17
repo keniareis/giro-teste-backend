@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class InvestmentDTO {
+    private Long id;
 
     @NotNull(message = "initial_amount is required")
     @Positive(message = "initial_amount must be positive")
