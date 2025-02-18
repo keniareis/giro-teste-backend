@@ -3,7 +3,9 @@ package com.keniareis.backend_giro.services;
 import com.keniareis.backend_giro.models.Investor;
 import com.keniareis.backend_giro.repository.InvestorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class InvestorService {
 
     public void deleteInvestor(Long id){
         Investor investor = investorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Investor not found with ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Investor not found with ID: " + id));
 
         investorRepository.delete(investor);
     }

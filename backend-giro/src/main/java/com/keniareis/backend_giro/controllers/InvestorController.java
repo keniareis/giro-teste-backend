@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,13 +44,23 @@ public class InvestorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdInvestor);
     }
 
-    
+    @Operation(
+        summary = "Delete investor",
+        description = "delete investor by ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Delete investor successfully", 
+            content = @Content(schema = @Schema(type = "string", example = "investor deleted successfully"))),
+        @ApiResponse(responseCode = "404", description = "No investor with this ID found")
+    })
     @DeleteMapping("/{id}")
     public String deleteInvestor(@PathVariable Long id){
         investorService.deleteInvestor(id);
         return "Investor and associated investments deleted successfully";
     }
 
+    @Operation(
+        summary = "Get all investors",
+        description = "get all investors investors")
     @GetMapping
     public List<Investor> getAllInvestors(){
         return investorService.getAllInvestors();
