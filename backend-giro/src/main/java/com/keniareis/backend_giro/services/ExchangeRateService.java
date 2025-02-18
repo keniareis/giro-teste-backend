@@ -52,7 +52,7 @@ public class ExchangeRateService {
 
     public ExchangeRate updateExchangeRate(Long id, ExchangeRateDTO updateDTO){
         ExchangeRate exchangeRate = exchangeRateRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Exchange rate not found with ID: \" + id"));
+                .orElseThrow(() -> new RuntimeException("Exchange rate not found with ID: " + id));
 
         if (updateDTO.getId() != null && !updateDTO.getId().equals(id)){
             throw new RuntimeException("ID cannot be updated");
