@@ -3,9 +3,12 @@ package com.keniareis.backend_giro.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -17,13 +20,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Contains;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.keniareis.backend_giro.dto.ExchangeRateDTO;
+import com.keniareis.backend_giro.dto.ExchangeRateUpdateDTO;
 import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.Currency;
 import com.keniareis.backend_giro.models.ExchangeRate;
 import com.keniareis.backend_giro.repository.ExchangeRateRepository;
+
+import jakarta.validation.constraints.AssertTrue;
 
 @ExtendWith(MockitoExtension.class)
 public class ExchangeRateServiceTest {
@@ -96,7 +105,7 @@ public class ExchangeRateServiceTest {
     @Test
     @DisplayName("Should update exchange rate successfully")
     void updateExchangeRateSuccessTest(){
-        ExchangeRateDTO updateDTO = new ExchangeRateDTO();
+        ExchangeRateUpdateDTO updateDTO = new ExchangeRateUpdateDTO();
         updateDTO.setDailyRate(6.0);
         updateDTO.setDailyVariation(0.2);
         updateDTO.setCurrencyId(1L);
@@ -122,14 +131,14 @@ public class ExchangeRateServiceTest {
     @DisplayName("Should throw an exception when exchange rate ID is not found")
     void updateExchangeRateNotFoundTest(){
         Long id = 1L;
-        ExchangeRateDTO updateDTO = new ExchangeRateDTO();
+        ExchangeRateUpdateDTO updateDTO = new ExchangeRateUpdateDTO();
         when(exchangeRateRepository.findById(id)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
             exchangeRateService.updateExchangeRate(id, updateDTO);
         });
 
-        assertEquals("Exchange rate not found with ID: " + id, exception.getMessage());
+        assertEquals(exception.getStatusCode() , HttpStatus.NOT_FOUND);
 
         verify(exchangeRateRepository, times(1)).findById(id);
         verify(exchangeRateRepository, never()).save(any(ExchangeRate.class));
