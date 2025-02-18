@@ -52,7 +52,7 @@ class CurrencyServiceTest {
 
     @Test
     @DisplayName("Should throw DuplicatedCurrencyException when currency name already exists")
-    void createCurrency_DuplicateName(){
+    void createCurrencyDuplicateName(){
         Currency currency = new Currency();
         currency.setName("Dólar Americano");
         currency.setType("USD");
@@ -70,7 +70,7 @@ class CurrencyServiceTest {
 
     @Test
     @DisplayName("Should throw DuplicatedCurrencyException when currency type already exists")
-    void createCurrency_DuplicateType(){
+    void createCurrencyDuplicateType(){
         Currency currency = new Currency();
         currency.setName("Dólar Americano");
         currency.setType("USD");
@@ -88,7 +88,7 @@ class CurrencyServiceTest {
 
     @Test
     @DisplayName("Should throw RunTimeException when currency ID is not found")
-    void getCurrencyById_NotFound(){
+    void getCurrencyByIdNotFound(){
         when(currencyRepository.findById(1L)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
@@ -100,7 +100,7 @@ class CurrencyServiceTest {
 
     @Test
     @DisplayName("Should throw IllegalArgumentException when currency ID is null")
-    void getCurrencyById_NullId(){
+    void getCurrencyByIdNullId(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             currencyService.getCurrencyById(null);
         });
