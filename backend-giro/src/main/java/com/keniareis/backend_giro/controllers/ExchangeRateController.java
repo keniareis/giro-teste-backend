@@ -32,7 +32,9 @@ public class ExchangeRateController {
     private CurrencyService currencyService;
 
 
-    @Operation(description = "Create a new exchange rate")
+    @Operation(
+        summary = "Create a new exchange rate",    
+        description = "Create a new exchange rate")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Create a new exchange rate successfully"),
         @ApiResponse(responseCode = "400", description = "Currency_id must not be null"),
@@ -55,7 +57,9 @@ public class ExchangeRateController {
     }
 
 
-    @Operation(description = "get recents exchange rates")
+    @Operation(
+        summary = "Get last 7 days exchange rates",    
+        description = "get recents exchange rates")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Get all recents exchange rates successfully"),
         @ApiResponse(responseCode = "404", description = "No recents exchange rates found")
@@ -65,7 +69,9 @@ public class ExchangeRateController {
         return exchangeRateService.getRecentRates();
     }
 
-    @Operation(description = "get all exchange rates")
+    @Operation(
+        summary = "Get all exchange rates",    
+        description = "get all exchange rates")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Get all exchange rates successfully"),
         @ApiResponse(responseCode = "404", description = "No exchange rates found")
@@ -76,7 +82,9 @@ public class ExchangeRateController {
     }
 
 
-    @Operation(description = "update exchange rate")
+    @Operation(
+        summary = "Update exchange rate by ID",    
+        description = "update exchange rate")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "update exchange rate successfully"),
         @ApiResponse(responseCode = "404", description = "No exchange rates found")
@@ -87,7 +95,9 @@ public class ExchangeRateController {
     }
 
 
-    @Operation(description = "delete old exchange rates")
+    @Operation(
+        summary = "Delete pass 30 days old exchange rates",    
+        description = "delete old exchange rates")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Delete all old exchange rates successfully", 
             content = @Content(schema = @Schema(type = "string", example = "Old exchange rates deleted successfully"))),

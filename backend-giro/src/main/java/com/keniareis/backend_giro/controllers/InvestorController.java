@@ -24,7 +24,7 @@ public class InvestorController {
     @Autowired
     private InvestorService investorService;
 
-     @Operation(
+    @Operation(
         summary = "Create a new investor",
         description = "Creates a new investor with the provided name and email. If an investor with the same email already exists, a 400 error is returned."
     )
