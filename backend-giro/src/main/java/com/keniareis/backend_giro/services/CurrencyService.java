@@ -1,6 +1,7 @@
 package com.keniareis.backend_giro.services;
 
 import com.keniareis.backend_giro.exceptions.DuplicateCurrencyException;
+import com.keniareis.backend_giro.exceptions.NoCurrenciesFoundException;
 import com.keniareis.backend_giro.models.Currency;
 import com.keniareis.backend_giro.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,13 @@ public class CurrencyService {
     }
 
     public List<Currency> getAllCurrencies(){
-        return currencyRepository.findAll();
+        List<Currency> currencies =  currencyRepository.findAll();
+
+        if (currencies.isEmpty()) {
+            throw new NoCurrenciesFoundException("No currencies found");
+        }
+
+        return currencies;
     }
 
     public Currency getCurrencyById(Long id){

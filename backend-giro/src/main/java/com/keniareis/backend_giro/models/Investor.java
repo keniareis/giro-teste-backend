@@ -7,6 +7,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Data
 public class Investor {
@@ -21,6 +23,7 @@ public class Investor {
     @NotBlank(message = "investor email is required")
     private String email;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToMany(mappedBy = "investor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Investment> investments;
 }
