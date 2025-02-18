@@ -13,6 +13,7 @@ public class InvestmentController {
 
     @Autowired
     private InvestmentService investmentService;
+    
 
     @PostMapping
     public Investment createInvestment(@Valid @RequestBody InvestmentDTO investmentDTO){
