@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +23,13 @@ public class CurrencyController {
 
     @Operation(description = "Create a new currency")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Create a new currency successfully"),
+        @ApiResponse(responseCode = "201", description = "Create a new currency successfully"),
         @ApiResponse(responseCode = "409", description = "Duplicate currency name or type"),
         @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     @PostMapping
-    public Currency createCurrency(@Valid @RequestBody Currency currency){
-        return currencyService.createCurrency(currency);
+    public ResponseEntity<Currency> createCurrency(@Valid @RequestBody Currency currency){
+        return new ResponseEntity<>(currencyService.createCurrency(currency), HttpStatus.CREATED);
     }
 
     @Operation(description = "get all currencies")

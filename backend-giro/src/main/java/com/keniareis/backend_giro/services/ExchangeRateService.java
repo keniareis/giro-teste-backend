@@ -1,11 +1,14 @@
 package com.keniareis.backend_giro.services;
 
 import com.keniareis.backend_giro.dto.ExchangeRateDTO;
+import com.keniareis.backend_giro.dto.ExchangeRateUpdateDTO;
 import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.ExchangeRate;
 import com.keniareis.backend_giro.repository.ExchangeRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,12 +31,21 @@ public class ExchangeRateService {
         LocalDate date = LocalDate.now().minusDays(7);
         List<ExchangeRate> recentRates = exchangeRateRepository.findRecentRates(date);
 
+        if (recentRates.isEmpty()) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No recent exchange rates found");
+        }
+
         return recentRates.stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<ExchangeRate> getAllExchangeRates(){
+        List<ExchangeRate> rates = exchangeRateRepository.findAll();
+
+        if (rates.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No exchange rates found");
+        }
         return exchangeRateRepository.findAll();
     }
 
@@ -50,15 +62,12 @@ public class ExchangeRateService {
         return dto;
     }
 
-    public ExchangeRate updateExchangeRate(Long id, ExchangeRateDTO updateDTO){
+    public ExchangeRate updateExchangeRate(Long id, ExchangeRateUpdateDTO updateDTO){
         ExchangeRate exchangeRate = exchangeRateRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Exchange rate not found with ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Exchange rate not found with ID: " + id));
 
         if (updateDTO.getId() != null && !updateDTO.getId().equals(id)){
             throw new RuntimeException("ID cannot be updated");
-        }
-        if (updateDTO.getDate() != null && !updateDTO.getDate().equals(exchangeRate.getDate())){
-            throw new RuntimeException("Date cannot be updated");
         }
 
         if (updateDTO.getDailyVariation() != null){
@@ -79,7 +88,7 @@ public class ExchangeRateService {
 
         long count = exchangeRateRepository.countByDateBefore(cutoffDate);
         if (count == 0){
-            throw new IllegalArgumentException("No old exchange rates found to delete");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No old exchange rates found to delete");
         }
 
         exchangeRateRepository.deleteOldRates(cutoffDate);
