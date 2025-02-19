@@ -42,7 +42,12 @@ http://localhost:8080
 
 ## 🔍 Testando a Aplicação
 
-**Executar todos os testes:**
+A API pode ser testada das seguintes formas:
+
+- **Swagger UI**: Interface interativa disponível em http://localhost:8080/swagger-ui.html
+- **Insomnia ou Postman**: Envie requisições diretamente para os endpoints
+
+**Executar todos os testes unitários:**
 ```bash
 mvn test
 ```
