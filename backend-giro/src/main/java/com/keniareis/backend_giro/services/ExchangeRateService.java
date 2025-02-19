@@ -1,6 +1,5 @@
 package com.keniareis.backend_giro.services;
 
-import com.keniareis.backend_giro.dto.ExchangeRateDTO;
 import com.keniareis.backend_giro.dto.ExchangeRateUpdateDTO;
 import com.keniareis.backend_giro.dto.RecentRateResponseDTO;
 import com.keniareis.backend_giro.models.ExchangeRate;
